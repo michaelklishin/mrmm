@@ -1,0 +1,11 @@
+[package]
+name = "mrmm"
+version = "0.1.0"
+authors = ["Michael Klishin <michael@clojurewerkz.org>"]
+
+[dependencies]
+
+clap = "2.29"
+gh = { path = "gh" }
+
+[workspace]
