@@ -6,6 +6,6 @@ authors = ["Michael Klishin <michael@clojurewerkz.org>"]
 [dependencies]
 
 clap = "2.29"
-gh = { path = "gh" }
+gh = { git = "https://github.com/michaelklishin/gh-rs.git" }
 
 [workspace]
