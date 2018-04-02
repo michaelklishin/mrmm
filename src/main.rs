@@ -3,7 +3,6 @@ extern crate gh;
 extern crate clap;
 
 use std::{env, process};
-use std::env::VarError;
 use std::error::Error;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -51,16 +50,13 @@ fn main() {
                          .takes_value(true)))
         .get_matches();
 
-    let token: Option<String> = match cli.value_of("github-token") {
-        Some(val) => Some(String::from(val)),
-        None      => {
-            match env::var(TOKEN_ENV_VAR) {
-                Ok(val)                      => Some(val),
-                Err(VarError::NotPresent)    => None,
-                Err(VarError::NotUnicode(_)) => None
-            }
-        }
-    };
+    let fallback_token: Option<String> =
+        env::var(TOKEN_ENV_VAR).ok();
+
+    let token: Option<String> = cli
+        .value_of("github-token")
+        .map (|val| String::from(val))
+        .or(fallback_token);
 
     match token {
         Some(val) => run_with_token(&cli, &val),
@@ -68,7 +64,7 @@ fn main() {
     };
 }
 
-fn run_with_token(cli: &ArgMatches, token: &String) {
+fn run_with_token(cli: &ArgMatches, token: &str) {
     let path = cli.value_of("repo-list-file")
         .map(|s| Path::new(s) )
         .unwrap();
