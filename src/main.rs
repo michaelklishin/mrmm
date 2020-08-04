@@ -3,7 +3,6 @@ extern crate gh;
 extern crate clap;
 
 use std::{env, process};
-use std::error::Error;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::path::Path;
@@ -161,7 +160,7 @@ fn read_repository_list(path: &Path) -> Vec<String> {
     println!("Will load the list of repositories from {}", printable_path);
 
     let reader = match File::open(&path) {
-        Err(reason) => panic!("Aborting. Couldn't open {}: {}", printable_path, reason.description()),
+        Err(reason) => panic!("Aborting. Couldn't open {}: {}", printable_path, reason.to_string()),
         Ok(file)    => BufReader::new(file)
     };
 
