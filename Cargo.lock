@@ -375,7 +375,7 @@ dependencies = [
 [[package]]
 name = "gh"
 version = "0.2.0"
-source = "git+https://github.com/michaelklishin/gh-rs.git#5217ba9b3432627f2d867a1a10bc42987fa4a161"
+source = "git+https://github.com/michaelklishin/gh-rs.git#0787a8ea65eac859327f43ffe32f329b6b67871a"
 dependencies = [
  "failure",
  "failure_derive",
